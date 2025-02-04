@@ -3,7 +3,7 @@ C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojo
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\controlador\PlatoController.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\controlador\ProductoController.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\controlador\VentaController.java
-C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\dto\DetalleVentaDTO.java
+C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\dto\DetalleMesaDTO.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\dto\UsuarioDTO.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\JojoleteApplication.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\models\CabeceraVenta.java
@@ -14,6 +14,7 @@ C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojo
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\models\Producto.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\models\Usuario.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\repositorios\CabeceraVentaRepository.java
+C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\repositorios\DetalleMesaRepository.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\repositorios\DetalleVentaRepository.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\repositorios\MesaRepository.java
 C:\Users\strim\OneDrive\Documentos\Jojolete\jojolete\src\main\java\jojolete\jojolete\repositorios\PlatoRepositorio.java

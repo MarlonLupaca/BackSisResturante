@@ -1,9 +1,9 @@
 package jojolete.jojolete.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import java.util.List;
+import jojolete.jojolete.dto.DetalleMesaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +18,8 @@ public class Mesa {
     private Long id;
     private String nombre;
     private String estado;
-    
-    
-    //tendra un estado
-    //tendra un detalle 
+
+    @OneToMany(mappedBy = "mesa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<DetalleMesaDTO> detalles;
 }

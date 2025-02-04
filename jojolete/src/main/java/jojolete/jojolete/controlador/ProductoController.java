@@ -40,4 +40,8 @@ public class ProductoController {
     public ResponseEntity<String> deleteProducto(@PathVariable Long id) {
         return ResponseEntity.ok(productoServicio.deleteProducto(id));
     }
+    @GetMapping("/stock-bajo")
+    public List<Producto> getProductosStockBajo() {
+        return productoServicio.getProductosStockBajo();
+    }
 }

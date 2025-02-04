@@ -1,9 +1,10 @@
 package jojolete.jojolete.repositorios;
 
+
+import jojolete.jojolete.models.Mesa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import jojolete.jojolete.models.Categoria;
 
 @Repository
-public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
+public interface MesaRepository extends JpaRepository<Mesa, Long> {
 }

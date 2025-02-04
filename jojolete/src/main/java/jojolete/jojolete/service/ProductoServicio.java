@@ -2,12 +2,11 @@ package jojolete.jojolete.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
-
 import jojolete.jojolete.models.Producto;
 import jojolete.jojolete.repositorios.ProductoRepositorio;
+
 @Service
 public class ProductoServicio {
     
@@ -16,6 +15,11 @@ public class ProductoServicio {
 
     public List<Producto> getAllProductos() {
         return productoRepositorio.findAll();
+    }
+
+    // Nuevo método para obtener productos con stock bajo
+    public List<Producto> getProductosStockBajo() {
+        return productoRepositorio.findByStockLessThan(10);
     }
 
     public String saveProducto(Producto producto) {
@@ -29,7 +33,6 @@ public class ProductoServicio {
 
     public String updateProducto(Long id, Producto productoActualizado) {
         Optional<Producto> productoOptional = productoRepositorio.findById(id);
-
         if (productoOptional.isPresent()) {
             Producto producto = productoOptional.get();
             producto.setNombre(productoActualizado.getNombre());
@@ -49,7 +52,6 @@ public class ProductoServicio {
 
     public String deleteProducto(Long id) {
         Optional<Producto> productoOptional = productoRepositorio.findById(id);
-
         if (productoOptional.isPresent()) {
             try {
                 productoRepositorio.delete(productoOptional.get());

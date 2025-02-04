@@ -17,8 +17,6 @@ public class PlatoController {
     @Autowired
     private PlatoServicio platoServicio;
     
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
 
     @GetMapping
     public List<Plato> getAllPlatos() {
@@ -34,21 +32,18 @@ public class PlatoController {
     @PostMapping
     public ResponseEntity<String> savePlato(@RequestBody Plato plato) {
         platoServicio.savePlato(plato);
-        messagingTemplate.convertAndSend("/topic/platos", "{ \"evento\": \"CREADO\", \"nombre\": \"" + plato.getNombre() + "\" }");
         return ResponseEntity.ok("Plato creado");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updatePlato(@PathVariable Long id, @RequestBody Plato plato) {
         platoServicio.updatePlato(id, plato);
-        messagingTemplate.convertAndSend("/topic/platos", "{ \"evento\": \"ACTUALIZADO\", \"id\": " + id + " }");
         return ResponseEntity.ok("Plato actualizado");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePlato(@PathVariable Long id) {
         platoServicio.deletePlato(id);
-        messagingTemplate.convertAndSend("/topic/platos", "{ \"evento\": \"ELIMINADO\", \"id\": " + id + " }");
         return ResponseEntity.ok("Plato eliminado");
     }
     

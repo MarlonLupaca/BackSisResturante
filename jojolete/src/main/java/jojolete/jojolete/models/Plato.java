@@ -20,5 +20,7 @@ public class Plato {
     
     @Column(nullable = false)
     private Double precio;
+    
+    private boolean estado;
 }
 

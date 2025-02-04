@@ -13,8 +13,27 @@ public class ProductoServicio {
     @Autowired
     private ProductoRepositorio productoRepositorio;
 
+    // Método para obtener solo los productos activos
     public List<Producto> getAllProductos() {
-        return productoRepositorio.findAll();
+        return productoRepositorio.findByEstadoTrue();  // Método customizado en el repositorio
+    }
+
+    // Método para actualizar el estado (activo/inactivo) de un producto
+    public String updateEstadoProducto(Long id, boolean estado) {
+        Optional<Producto> productoOptional = productoRepositorio.findById(id);
+        if (productoOptional.isPresent()) {
+            Producto producto = productoOptional.get();
+            producto.setEstado(estado); // Cambiar el estado del producto
+            
+            try {
+                productoRepositorio.save(producto);
+                return "Estado del producto actualizado exitosamente";
+            } catch (Exception e) {
+                return "Error al actualizar el estado del producto: " + e.getMessage();
+            }
+        } else {
+            return "Producto no encontrado";
+        }
     }
 
     // Nuevo método para obtener productos con stock bajo

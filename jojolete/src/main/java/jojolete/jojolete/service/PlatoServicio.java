@@ -15,8 +15,27 @@ public class PlatoServicio {
     @Autowired
     private PlatoRepositorio platoRepositorio;
 
+    // Método para obtener solo los platos activos (estado = true)
     public List<Plato> getAllPlatos() {
-        return platoRepositorio.findAll();
+        return platoRepositorio.findByEstadoTrue();  // Método customizado en el repositorio
+    }
+
+    // Método para actualizar el estado (activo/inactivo) de un plato
+    public String updateEstadoPlato(Long id, boolean estado) {
+        Optional<Plato> platoOptional = platoRepositorio.findById(id);
+        if (platoOptional.isPresent()) {
+            Plato plato = platoOptional.get();
+            plato.setEstado(estado); // Cambiar el estado del plato
+            
+            try {
+                platoRepositorio.save(plato);
+                return "Estado del plato actualizado exitosamente";
+            } catch (Exception e) {
+                return "Error al actualizar el estado del plato: " + e.getMessage();
+            }
+        } else {
+            return "Plato no encontrado";
+        }
     }
 
     public String savePlato(Plato plato) {

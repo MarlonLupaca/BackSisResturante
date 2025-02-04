@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 @RestController
 @RequestMapping("/api/mesas")
@@ -14,9 +16,13 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class MesaController {
     private final MesaService mesaService;
+    
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
 
     @PostMapping
     public ResponseEntity<Mesa> crearMesa(@RequestBody Mesa mesa) {
+        messagingTemplate.convertAndSend("/topic/mesas", "{ \"evento\": \"ELIMINADO\", \"nombre\": \"" + "\" }");
         return ResponseEntity.ok(mesaService.crearMesa(mesa));
     }
 
@@ -34,6 +40,7 @@ public class MesaController {
     public ResponseEntity<DetalleMesaDTO> agregarDetalle(
             @PathVariable String mesaNombre,
             @RequestBody DetalleRequest detalleRequest) {
+        messagingTemplate.convertAndSend("/topic/mesas", "{ \"evento\": \"ELIMINADO\", \"nombre\": \"" + "\" }");
         return ResponseEntity.ok(mesaService.agregarDetalle(
             mesaNombre, 
             detalleRequest.getPlatoId(), 
@@ -45,12 +52,14 @@ public class MesaController {
 
     @DeleteMapping("/detalles/{detalleId}")
     public ResponseEntity<Void> eliminarDetalle(@PathVariable Long detalleId) {
+        messagingTemplate.convertAndSend("/topic/mesas", "{ \"evento\": \"ELIMINADO\", \"nombre\": \"" + "\" }");
         mesaService.eliminarDetalle(detalleId);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{nombre}")
     public ResponseEntity<Void> eliminarMesa(@PathVariable String nombre) {
+        messagingTemplate.convertAndSend("/topic/mesas", "{ \"evento\": \"ELIMINADO\", \"nombre\": \"" + "\" }");
         mesaService.eliminarMesa(nombre);
         return ResponseEntity.noContent().build();
     }
@@ -64,11 +73,13 @@ public class MesaController {
     public ResponseEntity<DetalleMesaDTO> actualizarCantidadDetalle(
         @PathVariable Long detalleId, 
         @PathVariable Integer cantidad) {
+        messagingTemplate.convertAndSend("/topic/mesas", "{ \"evento\": \"ELIMINADO\", \"nombre\": \"" + "\" }");
         DetalleMesaDTO detalleActualizado = mesaService.actualizarCantidadDetalle(detalleId, cantidad);
         return ResponseEntity.ok(detalleActualizado);
     }
     @DeleteMapping("/{nombreMesa}/detalles")
     public ResponseEntity<Void> eliminarDetallesMesa(@PathVariable String nombreMesa) {
+        messagingTemplate.convertAndSend("/topic/mesas", "{ \"evento\": \"ELIMINADO\", \"nombre\": \"" + "\" }");
         mesaService.eliminarDetallesPorNombreMesa(nombreMesa);
         return ResponseEntity.ok().build();
     }

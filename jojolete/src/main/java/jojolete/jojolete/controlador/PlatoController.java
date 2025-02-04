@@ -3,9 +3,10 @@ package jojolete.jojolete.controlador;
 
 import jojolete.jojolete.models.Plato;
 import jojolete.jojolete.service.PlatoServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public class PlatoController {
     @Autowired
     private PlatoServicio platoServicio;
+    
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
 
     @GetMapping
     public List<Plato> getAllPlatos() {
@@ -29,16 +33,28 @@ public class PlatoController {
 
     @PostMapping
     public ResponseEntity<String> savePlato(@RequestBody Plato plato) {
-        return ResponseEntity.ok(platoServicio.savePlato(plato));
+        platoServicio.savePlato(plato);
+        messagingTemplate.convertAndSend("/topic/platos", "{ \"evento\": \"CREADO\", \"nombre\": \"" + plato.getNombre() + "\" }");
+        return ResponseEntity.ok("Plato creado");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updatePlato(@PathVariable Long id, @RequestBody Plato plato) {
-        return ResponseEntity.ok(platoServicio.updatePlato(id, plato));
+        platoServicio.updatePlato(id, plato);
+        messagingTemplate.convertAndSend("/topic/platos", "{ \"evento\": \"ACTUALIZADO\", \"id\": " + id + " }");
+        return ResponseEntity.ok("Plato actualizado");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePlato(@PathVariable Long id) {
-        return ResponseEntity.ok(platoServicio.deletePlato(id));
+        platoServicio.deletePlato(id);
+        messagingTemplate.convertAndSend("/topic/platos", "{ \"evento\": \"ELIMINADO\", \"id\": " + id + " }");
+        return ResponseEntity.ok("Plato eliminado");
     }
+    
+    @PutMapping("/estado/{id}")
+    public String updateEstadoPlato(@PathVariable Long id, @RequestParam boolean estado) {
+        return platoServicio.updateEstadoPlato(id, estado);
+    }
+
 }

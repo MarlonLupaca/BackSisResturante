@@ -12,4 +12,5 @@ public interface ProductoRepositorio extends JpaRepository<Producto, String> {
 
     public Optional<Producto> findById(Long id);
     List<Producto> findByStockLessThan(Integer stock);
+    List<Producto> findByEstadoTrue();
 }

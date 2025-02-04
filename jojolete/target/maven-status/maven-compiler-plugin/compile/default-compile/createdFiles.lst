@@ -13,6 +13,7 @@ jojolete\jojolete\controlador\MesaController.class
 jojolete\jojolete\dto\DetalleMesaDTO.class
 jojolete\jojolete\repositorios\UsuarioRepositorio.class
 jojolete\jojolete\models\CabeceraVenta.class
+jojolete\jojolete\websocket\WebSocketConfig.class
 jojolete\jojolete\repositorios\ProductoRepositorio.class
 jojolete\jojolete\service\MesaService.class
 jojolete\jojolete\models\DetalleVenta.class
